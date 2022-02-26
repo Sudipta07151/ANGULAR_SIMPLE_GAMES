@@ -1,0 +1,96 @@
+<div class="ui vertically divided grid">
+  <div class="ui column centered grid">
+    <div class="ui column centered grid">
+      <div class="four column row">
+        <button
+          class="ui button olive"
+          (click)="handleComparator('>')"
+          [disabled]="gt"
+        >
+          <i class="angle right icon"></i>
+          GREATER
+        </button>
+        <button
+          class="ui button blue"
+          (click)="handleComparator('=')"
+          [disabled]="eq"
+        >
+          <i class="exchange icon"></i>
+          EQUALS
+        </button>
+        <button
+          class="ui button orange"
+          (click)="handleComparator('<')"
+          [disabled]="lt"
+        >
+          <i class="angle left icon"></i>
+          LESSER
+        </button>
+      </div>
+      <div class="four column row">
+        <div class="ui action input">
+          <select
+            class="ui compact selection dropdown"
+            (change)="handleSelected($event)"
+            [disabled]="!lt && !eq && !gt"
+          >
+            <ng-container *ngFor="let number of range">
+              <option [value]="number">
+                {{ number }}
+              </option>
+            </ng-container>
+          </select>
+        </div>
+      </div>
+
+      <div class="four column row" *ngIf="selected">
+        <div class="ui action input">
+          <a class="ui pointing purple basic label huge">
+            {{ gt == true ? "GREATER THAN " + selected : ""
+            }}{{ lt == true ? "LESSER THAN " + selected : ""
+            }}{{ eq == true ? "EQUALS TO " + selected : "" }}</a
+          >
+        </div>
+      </div>
+
+      <div class="four column row">
+        <div class="column">
+          <img [src]="dicesArray[indexOne].imageURL" alt="" srcset="" />
+        </div>
+        <div class="column">
+          <img [src]="dicesArray[indexTwo].imageURL" alt="" srcset="" />
+        </div>
+      </div>
+
+      <div class="four column row">
+        <button
+          class="ui button green"
+          (click)="handleButtonRoll()"
+          [disabled]="(!lt && !eq && !gt) || !selected"
+        >
+          ROLL
+        </button>
+      </div>
+
+      <div class="four column row" *ngIf="!lt && !eq && !gt">
+        <div class="ui items">
+          <div class="item">
+            <div class="column">
+              <div class="ui tiny image" *ngIf="result">
+                <img src="../../assets/images/correct.png" />
+              </div>
+            </div>
+            <div class="column">
+              <div class="ui tiny image" *ngIf="!result">
+                <img src="../../assets/images/wrong.png" />
+              </div>
+              <div class="middle aligned content">
+                {{ result ? "YOU GOT IT RIGHT" : "YOU GOT IT WRONG" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<div class="row">
+  <div>
+    <img
+      [src]="card.src"
+      class="front"
+      class="ui image centered small"
+      [ngClass]="flipped ? '' : 'hidden'"
+    />
+  </div>
+  <div class="row">
+    <img
+      [ngClass]="flipped ? 'hidden' : ''"
+      class="ui centered image small"
+      src="../../../assets/teamimages/cover.png"
+      (click)="handleClick(card)"
+    />
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="ui centered vertically divided grid">
+  <div class="row">
+    <button class="ui button green" (click)="shuffleCards()">NEW GAME</button>
+  </div>
+  <div class="ui centered row">
+    <div class="ui grid four column row">
+      <div class="row">
+        <div class="column" *ngFor="let card of shuffledCards">
+          <app-single-card
+            (clickCard)="handleClickCard($event)"
+            [card]="card"
+            [flipped]="card === choiceOne || card === choiceTwo || card.matched"
+          ></app-single-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!completed">
+    <a class="ui label large purple"> TURNS TAKEN: {{ turns }} </a>
+  </div>
+
+  <div class="row" *ngIf="completed">
+    <a class="ui label huge green"> YOU TOOK {{ turns }} TURNS</a>
+  </div>
+</div>
